@@ -157,6 +157,10 @@ i {
     background-size: cover;
 }
 
+#cuerpo {
+    background-color: #c2d7d8;
+}
+
 #headerwrap h1 {
     margin-top: 60px;
     margin-bottom: 15px;
@@ -182,8 +186,6 @@ i {
 #contact {
     padding: 40px 0;
 }
-
-.contact-form {}
 
 .contact-form label {
     color: #999;
