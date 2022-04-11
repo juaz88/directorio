@@ -310,3 +310,19 @@ i {
 .credits {
     color: #fff;
 }
+
+body {
+    background-color: rgba(238, 238, 238, 0.514)
+}
+
+.nav-link:hover {
+    background-color: #f7f4f46e !important
+}
+
+.nav-link .fa {
+    transition: all 1s
+}
+
+.nav-link:hover .fa {
+    transform: rotate(360deg)
+}
