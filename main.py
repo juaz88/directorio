@@ -12,7 +12,13 @@ def inicio():
 def admin():
     return render_template('view_admin.html')
     
+@app.route('/login_admin', methods=['get','post'])
+def login_admin():
+    return render_template('login_admin.html')
 
+@app.route('/legal')  
+def legal():
+    return render_template('login_admin.html')
 
 
 if __name__=='__main__':
