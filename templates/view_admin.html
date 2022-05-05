@@ -1,26 +1,132 @@
 {% extends 'base.html' %}
 
 <!-- contenido dinamico -->
-{% block body %}
+{% block nuevo_directorio %}
 <div class="container">
-    <form>
-        <div class="form-group row">
-            <label for="inputName" class="col-sm-1-12 col-form-label"></label>
-            <div class="col-sm-1-12">
-                <input type="text" class="form-control" name="inputName" id="inputName" placeholder="">
-            </div>
-        </div>
-        <fieldset class="form-group row">
-            <legend class="col-form-legend col-sm-1-12">Group name</legend>
-            <div class="col-sm-1-12">
 
-            </div>
-        </fieldset>
+    <h1>NUEVO DIRECTORIO</h1>
+
+    <div class="p-5">
+
+    </div>
+    <form action='/portal_admin' method="post">
         <div class="form-group row">
-            <div class="offset-sm-2 col-sm-10">
-                <button type="submit" class="btn btn-primary">Action</button>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="">Tipo de directorio</label>
+                    <select class="form-control" name="tipo" id="">
+                    <option selected={{data_create.0}}>{{data_create.0}}</option>   
+                    <option value="Persona juridica">Persona juridica</option>
+                    <option value="Persona natural">Persona natural</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Documento</label>
+                    <input type="text" class="form-control" name="documento" id="" placeholder="" value={{data_create.1}}>
+                </div>
+                <div class="form-group">
+                    <label for="">Nombre del directorio</label>
+                    <input type="text" class="form-control" name="nombre" id="" placeholder="" value={{data_create.2}}>
+                </div>
+                <div class="form-group">
+                    <label for="">Correo electronico</label>
+                    <input type="email" class="form-control" name="email" id="" placeholder="" value={{data_create.3}}>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="id_form" value="new_dir">
+                </div>
+                <div class="form-group"><button type="submit" class="btn btn-primary">Ingresar</button></div>
             </div>
+
         </div>
     </form>
+    <div class="alert-danger">
+        {{error}}
+    </div>
 </div>
-{% endblock %}
+
+
+{% endblock %} {% block consulta %}
+<div class="container">
+
+    <h1>CONSULTAR DIRECTORIO</h1>
+
+    <div class="p-5">
+
+    </div>
+    <form action="/portal_admin" method="post">
+        <div class="row">
+            <input type="hidden" name="id_form" value="search_dir">
+            <div class="col-6">
+
+                <div class="form-group row">
+                    <label for="inputName" class="col-sm-1-12 col-form-label">Codigo del directorio</label>
+                    <div class="col-sm-1-12">
+                        <input type="text" class="form-control" name="cod" id="" value={{data.0.0}}>
+                    </div>
+                    <small class="text-danger">
+                        {{error}}
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group"><button type="submit" class="btn btn-primary">Buscar</button></div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <blockquote class="blockquote">
+                            <p>Tipo: {{data.0.1}}</p>
+                            <p>Nombre: {{data.0.2}}</p>
+                            <p>Email: {{data.0.3}}</p>
+                            <p>PIN: {{data.0.4}}</p>
+
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+    <div class="p-5">
+
+    </div>
+
+
+    <h2>DOCUMENTOS</h2>
+
+
+    <button class="btn btn-info">+ Documento</button>
+    <hr>
+    <div class="row">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Nombre de archivo</th>
+                    <th>Acciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row">reteica año 2021</td>
+                    <td><i class="fa-brands fa-facebook"></i></td>
+
+                </tr>
+                <tr>
+                    <td scope="row">retefuente año 2021</td>
+                    <td></td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+{% endblock %} {% block nuevo_documento %} {% endblock %}

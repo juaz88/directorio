@@ -96,7 +96,7 @@ hr {
 }
 
 .navbar-default {
-    background-color: #37acb4;
+    background-color: #9e956afb;
     border-color: transparent;
 }
 
@@ -140,7 +140,7 @@ i {
 
 #headerwrap {
     /* background: url(../img/bg01.jpg) no-repeat center top; */
-    background-color: #37acb4;
+    background-color: #9e956afb;
     margin-top: -20px;
     padding-top: 200px;
     background-attachment: relative;
@@ -293,7 +293,7 @@ i {
 /* Copyrights */
 
 #copyrights {
-    background: #37acb4;
+    background: #9e956afb;
     padding: 20px 0;
     text-align: center;
 }

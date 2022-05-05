@@ -40,52 +40,70 @@
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="row">
-                <div class="col-5">
 
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#"> <b>Concepto legal</b> </a>
-                    </div>
 
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#"> <b>Concepto legal</b> </a>
                 </div>
 
-                <div class="col-9">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="/login_admin"> <b>Administrador</b> </a>
-                    </div>
 
+
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/login_admin"> <b>Administrador</b> </a>
                 </div>
+
 
                 <!--/.nav-collapse -->
 
+
+
+
+
             </div>
+
+
+
         </div>
     </div>
 
     <div id="headerwrap">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
-                    <h1>
-                        Consulta y descarga<br /> tus certificados.
-                    </h1>
-                    <form class="form-inline" role="form" action="view_admin" method="post">
+                <div class="col-lg-6 ">
+                    <div class="p-5">
+                        <h1>
+                            Consulta y descarga<br /> tus certificados.
+                        </h1>
+                        <br>
+                    </div>
+                    <form class="form-inline" role="form" action="/user" method="post">
                         <div class="">
-                            <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Ingresa tu email" />
+                            <input type="email" class="form-control" name="email" placeholder="Ingresa tu email" value="{{email}}" />
                         </div>
+
+                        <small class="text-danger">{{error_email}}</small>
                         <br />
 
                         <div class="">
-                            <input type="text" class="form-control" id="exampleInputEmail1" name="email" placeholder="Ingresa tu PIN" />
+                            <input type="password" class="form-control" name="pin" placeholder="Ingresa tu PIN" value="{{pin}}" />
                         </div>
+
+                        <small class="text-danger">{{error_pin}}</small>
                         <br />
                         <div>
                             <button type="submit" class="btn btn-warning btn-lg">Entrar!</button>
                         </div>
                     </form>
+                    <br>
+                    <div class="text-danger"><small>{{error_user}}</small></div>
                 </div>
                 <!-- /col-lg-6 -->
                 <div class="col-lg-6">
-                    <img class="img-responsive" src="static/img/certificado.png" alt="" />
+
+                    <img src="/static/img/fond.jpg" alt="" width="120%">
+
+
+
                 </div>
                 <!-- /col-lg-6 -->
             </div>
@@ -100,7 +118,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <h2 class="centered">Contacto</h2>
-                    <form class="contact-form php-mail-form" role="form" action="contactform/contactform.php" method="POST">
+                    <form class="contact-form php-mail-form" role="form">
                         <div class="form-group">
                             <input type="name" name="name" class="form-control" id="contact-name" placeholder="Tu nombre" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                             <div class="validate"></div>
@@ -111,11 +129,6 @@
                         </div>
                         <div class="form-group">
                             <input type="text" name="subject" class="form-control" id="contact-subject" placeholder="Asunto" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                            <div class="validate"></div>
-                        </div>
-
-                        <div class="form-group">
-                            <textarea class="form-control" name="message" id="contact-message" placeholder="Tu mensaje" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
                             <div class="validate"></div>
                         </div>
 
