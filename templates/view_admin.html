@@ -86,7 +86,21 @@
 
                         </blockquote>
                     </div>
+
+                    <div class="card-foot p-3">
+
+                        <div class="btn-group-lg" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-secondary" {% if (error!="" or not data.0.2 ) %} disabled {% else %} enable {% endif %}><a href="/portal_admin?opcion=3&cod={{data.0.0}}&t={{data.0.1}}&name={{data.0.2}}&email={{data.0.3}}">Actualizar</a></button>
+                            <button type="button" class="btn btn-secondary">Notificar</button>
+
+                        </div>
+
+                    </div>
                 </div>
+
+
+
+
             </div>
         </div>
 
@@ -129,4 +143,45 @@
 
 
 </div>
+{% endblock %} {% block update %}
+<div class="container">
+
+    <h1>ACTUALIZAR DIRECTORIO</h1>
+
+    <div class="p-5">
+
+    </div>
+    <form action='/portal_admin' method="post">
+        <div class="form-group row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="">Tipo de directorio</label>
+                    <select class="form-control" name="tipo" id="">
+                    <option selected={{data_update.1}}>{{data_update.1}}</option>    
+                    <option value="Persona juridica">Persona juridica</option>
+                    <option value="Persona natural">Persona natural</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Nombre del directorio</label>
+                    <input type="text" class="form-control" name="nombre" id="" placeholder="" value={{data_update.2}}>
+                </div>
+                <div class="form-group">
+                    <label for="">Correo electronico</label>
+                    <input type="email" class="form-control" name="email" id="" placeholder="" value={{data_update.3}}>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="id_form" value="update">
+                    <input type="hidden" name="cod" value={{data_update.0}}>
+                </div>
+                <div class="form-group"><button type="submit" class="btn btn-primary">Actualizar</button></div>
+                <small class="text-danger">{{error}}</small>
+            </div>
+
+        </div>
+    </form>
+
+</div>
+
 {% endblock %} {% block nuevo_documento %} {% endblock %}

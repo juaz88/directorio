@@ -1,6 +1,6 @@
+
 import random
-from pydoc import doc
-from click import pass_context
+from winreg import REG_QWORD
 from flask import Flask, redirect, render_template,url_for, request
 from database import baseD
 
@@ -23,18 +23,47 @@ def admin():
     
 @app.route('/login_admin', methods=['get','post'])
 def login_admin():
-    return render_template('login_admin.html')
-
+    user=""
+    clave=""
+    if request.method=="POST":
+        
+        if request.form['user'] and request.form['clave']:
+            user=request.form['user'] 
+            clave=request.form['clave']
+            conn=baseD()
+            data=conn.login_admin(user,clave)
+            if data==0 or not data:
+                error="El usuario no se encuentra registrado!"    
+                return render_template('login_admin.html',error=error, user=user, clave=clave)
+            else:
+                return admin()
+        else:
+            error="Las credenciales no son correctas"    
+            return render_template('login_admin.html',error=error,user=user, clave=user)
+    else:
+        return render_template('login_admin.html',error="",user=user, clave=clave)
+    
 @app.route('/legal')  
 def legal():
-    return render_template('login_admin.html')
+    return render_template('login_admin.html',error="",user="", clave="")
 
 @app.route('/portal_admin', methods=['POST','GET'])
 def p_admin():
     if request.method=='GET':
         opcion=request.args.get('opcion')
-
-        return render_template('view_admin.html',opcion=opcion,data_create=["","","",""] ,data=["","","","",""],error="")
+        cod=""
+        tipo=""
+        nombre=""
+        email=""
+        
+        if opcion=='3':
+            cod=request.args.get('cod')
+            tipo=request.args.get('t')
+            nombre=request.args.get('name')
+            email=request.args.get('email')
+            
+            
+        return render_template('view_admin.html',opcion=opcion,data_create=["","","",""] ,data=["","","","",""],error="",data_update=[cod,tipo,nombre,email])
     
     if request.method=="POST":
         #Procedimiento para el formulario nuevo directorio
@@ -89,6 +118,33 @@ def p_admin():
             else:
                 error="El campo no puede quedar vacio"
                 return render_template('view_admin.html',opcion='2', data=["","","","",""],error=error)         
+
+        if request.form['id_form']=='update':
+            error=""
+            conn=baseD()
+            cod=request.form['cod']
+            tipo=request.form['tipo']
+            nombre=request.form['nombre']
+            email=request.form['email']
+            
+            if nombre=="":
+                error=error + "Nombre vacío "
+            if email=="":
+                error=error + "email vacío " 
+            
+            if error !="":    
+                return render_template('view_admin.html',opcion='3',error=error,data_update=[cod,tipo,nombre,email])    
+            else:
+                pin=genera_pin(cod,email)
+                error=conn.actualizar_directorio(cod=cod,tipo=tipo,nombre=nombre,email=email,pin=pin)
+                
+                if error:
+                    return error
+                else:
+                    
+                    return render_template('view_admin.html',opcion='2',data=["","","","",""],error="")   
+                   
+
                 
 @app.route('/user',methods=['GET', 'POST'])
 def user():
@@ -133,11 +189,6 @@ def genera_pin(documento,email):
     return(pin)         
        
     
-    
-    
-        
-      
-
 
 
 if __name__=='__main__':

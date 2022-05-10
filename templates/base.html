@@ -64,7 +64,8 @@
             <div class="d-flex p-3 " style="width: 100%;">
 
                 <div class="container-fluid">
-                    {% if opcion == '1' %} {% block nuevo_directorio %} {% endblock %} {% endif %} {# opcion 1 #} {% if opcion == '2' %} {% block consulta %} {% endblock %} {% endif %}{# opcion 2 #}
+                    {% if opcion == '1' %} {% block nuevo_directorio %} {% endblock %} {% endif %} {# opcion 1 #} {% if opcion == '2' %} {% block consulta %} {% endblock %} {% endif %}{# opcion 2 #}{% if opcion == '3' %} {% block update %} {% endblock %} {% endif %}{# opcion
+                    3 #}
                 </div>
 
             </div>
