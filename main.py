@@ -1,6 +1,5 @@
 
 import random
-from winreg import REG_QWORD
 from flask import Flask, redirect, render_template,url_for, request
 from database import baseD
 
