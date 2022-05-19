@@ -45,7 +45,7 @@ class baseD():
             cur.execute(query)
             data=cur.fetchall()
             return data
-        except:
+        except :
             return 0
     
     def actualizar_directorio(self,cod,tipo,nombre,email,pin):

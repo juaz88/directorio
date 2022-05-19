@@ -1,7 +1,9 @@
 
+
 import random
 from flask import Flask, redirect, render_template,url_for, request
 from database import baseD
+from send import send_email
 
 app=Flask(__name__)
 
@@ -31,6 +33,7 @@ def login_admin():
             clave=request.form['clave']
             conn=baseD()
             data=conn.login_admin(user,clave)
+            print(data)
             if data==0 or not data:
                 error="El usuario no se encuentra registrado!"    
                 return render_template('login_admin.html',error=error, user=user, clave=clave)
@@ -54,15 +57,27 @@ def p_admin():
         tipo=""
         nombre=""
         email=""
-        
+        error=""
         if opcion=='3':
             cod=request.args.get('cod')
             tipo=request.args.get('t')
             nombre=request.args.get('name')
             email=request.args.get('email')
+            error=""
+        
+        if opcion=='4':
+            cod=request.args.get('cod')
+            tipo=request.args.get('t')
+            nombre=request.args.get('name')
+            email=request.args.get('email')
+            send=send_email()
+            data=baseD().consulta_directorio(cod)
+            pin=data[0][4]
+            error=send.notificar(pin,email,nombre)
+                
             
             
-        return render_template('view_admin.html',opcion=opcion,data_create=["","","",""] ,data=["","","","",""],error="",data_update=[cod,tipo,nombre,email])
+        return render_template('view_admin.html',opcion=opcion,data_create=["","","",""] ,data=["","","","",""],error=error,data_update=[cod,tipo,nombre,email])
     
     if request.method=="POST":
         #Procedimiento para el formulario nuevo directorio
@@ -142,7 +157,12 @@ def p_admin():
                 else:
                     
                     return render_template('view_admin.html',opcion='2',data=["","","","",""],error="")   
-                   
+        
+@app.route('/notified', methods=['GET'])
+def notified():
+    if request.method=="GET":
+       cod=request.args.get('cod')
+       email=request.args.get('email')                
 
                 
 @app.route('/user',methods=['GET', 'POST'])

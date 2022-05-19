@@ -58,7 +58,7 @@
     <form action="/portal_admin" method="post">
         <div class="row">
             <input type="hidden" name="id_form" value="search_dir">
-            <div class="col-6">
+            <div class="col-5">
 
                 <div class="form-group row">
                     <label for="inputName" class="col-sm-1-12 col-form-label">Codigo del directorio</label>
@@ -75,7 +75,7 @@
                 </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-7">
                 <div class="card">
                     <div class="card-body">
                         <blockquote class="blockquote">
@@ -91,7 +91,7 @@
 
                         <div class="btn-group-lg" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-secondary" {% if (error!="" or not data.0.2 ) %} disabled {% else %} enable {% endif %}><a href="/portal_admin?opcion=3&cod={{data.0.0}}&t={{data.0.1}}&name={{data.0.2}}&email={{data.0.3}}">Actualizar</a></button>
-                            <button type="button" class="btn btn-secondary">Notificar</button>
+                            <button type="button" class="btn btn-secondary" {% if (error!="" or not data.0.2 ) %} disabled {% else %} enable {% endif %}><a href="/portal_admin?opcion=4&cod={{data.0.0}}&t={{data.0.1}}&name={{data.0.2}}&email={{data.0.3}}">Notificar</a></button>
 
                         </div>
 
@@ -183,5 +183,32 @@
     </form>
 
 </div>
+{% endblock %} {% block notificado %}
+
+<div class="col-7">
+    <h2>Notificacion: </h2>
+    <div class="card">
+        <div class="card-body">
+            <blockquote class="blockquote">
+                <p>Tipo: {{data_update.1}}</p>
+                <p>Nombre: {{data_update.2}}</p>
+                <p>Email: {{data_update.3}}</p>
+
+
+            </blockquote>
+        </div>
+        <div class="card-footer">
+            {{error}}
+
+        </div>
+
+
+    </div>
+
+
+
+
+</div>
+
 
 {% endblock %} {% block nuevo_documento %} {% endblock %}
