@@ -120,13 +120,13 @@
                     <h2 class="centered">Solicita tus certificados</h2>
                     <form class="contact-form php-mail-form" action="/solicitud" method="post">
                         <div class="form-group">
-                            <input type="name" name="nombre" class="form-control" id="contact-name" placeholder="Tu nombre o el de tu empresa" />
+                            <input type="name" name="nombre" class="form-control" id="contact-name" placeholder="Tu nombre o el de tu empresa" required="True" />
                             <div class="invalid-feedback">
 
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="email" name="email_send" class="form-control" id="contact-email" placeholder="Tu Email" data-rule="email" data-msg="Please enter a valid email" />
+                            <input type="email" name="email_send" class="form-control" id="contact-email" placeholder="Tu Email" data-rule="email" data-msg="Please enter a valid email" required="True" />
 
                             <div class="invalid-feedback">
 
@@ -134,7 +134,7 @@
                             <!-- TODO: This is for server side, there is another version for browser defaults -->
                         </div>
                         <div class="form-group">
-                            <input type="text" name="documento" class="form-control" id="contact-subject" placeholder="Documento o NIT" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                            <input type="text" name="documento" class="form-control" id="contact-subject" placeholder="Documento o NIT" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" required="True" />
                             <div class="invalid-feedback">
 
                             </div>

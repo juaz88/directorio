@@ -70,6 +70,7 @@ def p_admin():
             email=request.args.get('email')
             error=""
         
+        
         if opcion=='4':
             cod=request.args.get('cod')
             tipo=request.args.get('t')
