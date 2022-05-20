@@ -90,8 +90,8 @@
                     <div class="card-foot p-3">
 
                         <div class="btn-group-lg" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-secondary" {% if (error!="" or not data.0.2 ) %} disabled {% else %} enable {% endif %}><a href="/portal_admin?opcion=3&cod={{data.0.0}}&t={{data.0.1}}&name={{data.0.2}}&email={{data.0.3}}">Actualizar</a></button>
-                            <button type="button" class="btn btn-secondary" {% if (error!="" or not data.0.2 ) %} disabled {% else %} enable {% endif %}><a href="/portal_admin?opcion=4&cod={{data.0.0}}&t={{data.0.1}}&name={{data.0.2}}&email={{data.0.3}}">Notificar</a></button>
+                            <button type="button" class="btn btn-info" {% if (error!="" or not data.0.2 ) %} disabled {% else %} enable {% endif %}><a class="btn"  href="/portal_admin?opcion=3&cod={{data.0.0}}&t={{data.0.1}}&name={{data.0.2}}&email={{data.0.3}}">Actualizar</a></button>
+                            <button type="button" class="btn btn-info" {% if (error!="" or not data.0.2 ) %} disabled {% else %} enable {% endif %}><a class="btn"  href="/portal_admin?opcion=4&cod={{data.0.0}}&t={{data.0.1}}&name={{data.0.2}}&email={{data.0.3}}">Notificar</a></button>
 
                         </div>
 
@@ -111,11 +111,39 @@
 
     </div>
 
-
+    <!-- para subir archivos al servidor -->
     <h2>DOCUMENTOS</h2>
 
+    <div class="input-group mb-3">
+        <div class="card-header">
+            <form action="/uploader" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-4">
 
-    <button class="btn btn-info">+ Documento</button>
+                        <input type="file" class="btn custom-file-input" name="archivo">
+                    </div>
+                    <div class="col-6">
+
+
+                        <input type="hidden" class="form-control" name="cod" value={{data.0.0}}>
+
+                        <button type="submit" class="btn btn-info" {% if (error!="" or not data.0.2 ) %} disabled {% else %} enable {% endif %}>Cargar</button>
+                    </div>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+        <small class="text-danger">
+            {{error_add}}
+        </small>
+
+
+    </div>
+    <!-- tabla para mostrar los archivos subidos -->
     <hr>
     <div class="row">
         <table class="table table-striped table-hover">
@@ -127,16 +155,13 @@
                 </tr>
             </thead>
             <tbody>
+                {% for doc in data_doc %}
                 <tr>
-                    <td scope="row">reteica año 2021</td>
-                    <td><i class="fa-brands fa-facebook"></i></td>
+                    <td scope="row">{{doc.1}}</td>
+                    <td><a href="/delete?cod_doc={{doc.0}}&file_name={{doc.1}}&cod={{doc.2}}"><button type="button" class="btn btn-danger">Eliminar</button></td></a>
 
                 </tr>
-                <tr>
-                    <td scope="row">retefuente año 2021</td>
-                    <td></td>
-
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
@@ -211,4 +236,4 @@
 </div>
 
 
-{% endblock %} {% block nuevo_documento %} {% endblock %}
+{% endblock %}

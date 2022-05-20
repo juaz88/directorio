@@ -15,11 +15,53 @@ class baseD():
         conn.close()
         return("datos ingresados con exito")
 
+    def add_document(self,filename,cod_dir):
+        conn=sqlite3.connect('bd.db')    
+        cur=conn.cursor()
+        
+        query=(f"SELECT COUNT(*) FROM DOCUMENTO WHERE NOMBRE_FILE='{filename}' AND COD_DIRECT='{cod_dir}'")
+        cur.execute(query)
+        result=cur.fetchall()
+      
+        if result[0][0]==0:
+            data=(filename,cod_dir)
+            query="INSERT INTO DOCUMENTO (NOMBRE_FILE,COD_DIRECT) VALUES (?,?)"
+            cur.execute(query,data)
+            conn.commit()
+            conn.close() 
+            return True
+        else:
+            conn.close() 
+            return False
+            
+    def consulta_document(self,cod):
+        try:
+            conn=sqlite3.connect('bd.db')    
+            cur=conn.cursor()    
+            query=f"SELECT * FROM DOCUMENTO WHERE COD_DIRECT='{cod}'"
+            cur.execute(query)
+            data=cur.fetchall()
+            return list(data)
+        except:
+            return 0        
+        
+    def delete_document(self,cod_doc):
+        try:
+            conn=sqlite3.connect('bd.db')    
+            cur=conn.cursor()    
+            query=f"DELETE FROM DOCUMENTO WHERE COD='{cod_doc}'"
+            cur.execute(query)
+            conn.commit()
+            conn.close() 
+            return True
+        except:
+            return False         
+    
     def consulta_directorio(self, cod):
         try:
             conn=sqlite3.connect('bd.db')    
             cur=conn.cursor()    
-            query=f"SELECT * FROM DIRECTORIO WHERE COD={cod}"
+            query=f"SELECT * FROM DIRECTORIO WHERE COD='{cod}'"
             cur.execute(query)
             data=cur.fetchall()
             return (data)

@@ -117,29 +117,46 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <h2 class="centered">Contacto</h2>
-                    <form class="contact-form php-mail-form" role="form">
+                    <h2 class="centered">Solicita tus certificados</h2>
+                    <form class="contact-form php-mail-form" action="/solicitud" method="post">
                         <div class="form-group">
-                            <input type="name" name="name" class="form-control" id="contact-name" placeholder="Tu nombre" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                            <div class="validate"></div>
+                            <input type="name" name="nombre" class="form-control" id="contact-name" placeholder="Tu nombre o el de tu empresa" />
+                            <div class="invalid-feedback">
+
+                            </div>
                         </div>
                         <div class="form-group">
-                            <input type="email" name="email" class="form-control" id="contact-email" placeholder="Tu Email" data-rule="email" data-msg="Please enter a valid email" />
-                            <div class="validate"></div>
+                            <input type="email" name="email_send" class="form-control" id="contact-email" placeholder="Tu Email" data-rule="email" data-msg="Please enter a valid email" />
+
+                            <div class="invalid-feedback">
+
+                            </div>
+                            <!-- TODO: This is for server side, there is another version for browser defaults -->
                         </div>
                         <div class="form-group">
-                            <input type="text" name="subject" class="form-control" id="contact-subject" placeholder="Asunto" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                            <div class="validate"></div>
+                            <input type="text" name="documento" class="form-control" id="contact-subject" placeholder="Documento o NIT" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                            <div class="invalid-feedback">
+
+                            </div>
                         </div>
 
                         <div class="form-group">
-                            <textarea class="form-control" name="message" id="contact-message" placeholder="Tu mensaje" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
-                            <div class="validate"></div>
+                            <textarea class="form-control" name="mensaje" id="contact-message" placeholder="Dejanos tu mensaje (Opcional)" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
+
+                            <small>Enviaremos un PIN de acceso a tu correo una vez validemos los datos!</small>
+
                         </div>
+                        <div>
+                            <small class="text-danger">{{error_send}}</small>
+                        </div>
+
 
                         <div class="form-send">
                             <button type="submit" class="btn btn-large">Envia mensaje</button>
+
                         </div>
+
+
                     </form>
                 </div>
             </div>
